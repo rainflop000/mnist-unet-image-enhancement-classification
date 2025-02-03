@@ -3,7 +3,6 @@ from tensorflow.keras.datasets import mnist
 from tensorflow.keras.layers import Input, Conv2D, Conv2DTranspose, MaxPooling2D, concatenate
 from tensorflow.keras.models import Model
 from tensorflow.keras.callbacks import Callback
-from tensorflow.keras.utils import plot_model
 import matplotlib.pyplot as plt
 import numpy as np
 
@@ -23,17 +22,6 @@ def low_resolution(image):
     reduced_quality = tf.image.resize(image[..., tf.newaxis], (height // 2, width // 2))
     original_size = tf.image.resize(reduced_quality, (height, width))
     return tf.squeeze(original_size).numpy()
-
-def display_samples(high_res_images, low_res_images, sample_count=3):
-    for i in range(sample_count):
-        plt.figure(figsize=(6, 3))
-        plt.subplot(121)
-        plt.imshow(high_res_images[i], cmap="gray")
-        plt.title("High Resolution")
-        plt.subplot(122)
-        plt.imshow(low_res_images[i], cmap="gray")
-        plt.title("Low Resolution")
-        plt.show()
 
 def unet_model(output_channels):
     inputs = Input(shape=[28, 28, 1])
@@ -103,9 +91,6 @@ def main():
         low_res_test_images_list.append(low_res_img)
     low_res_test_images = np.array(low_res_test_images_list)
 
-    # Display some sample images
-    display_samples(train_images, low_res_train_images, sample_count=3)
-
     # Normalize data
     low_res_train_images = low_res_train_images / 255.0
     low_res_test_images = low_res_test_images / 255.0
@@ -124,12 +109,9 @@ def main():
 
     # Print model summary
     model.summary()
-    
-    # Visualize model architecture
-    plot_model(model, show_shapes=True)
 
     # Train model
-    EPOCHS = 10
+    EPOCHS = 1
     BATCH_SIZE = 64
 
     test_loss_callback = DisplayCallback(low_res_test_images)
