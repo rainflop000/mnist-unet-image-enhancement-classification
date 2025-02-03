@@ -111,7 +111,7 @@ def main():
     model.summary()
 
     # Train model
-    EPOCHS = 1
+    EPOCHS = 10
     BATCH_SIZE = 64
 
     test_loss_callback = DisplayCallback(low_res_test_images)
