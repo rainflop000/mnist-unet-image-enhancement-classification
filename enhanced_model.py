@@ -95,7 +95,6 @@ class DisplayCallback(Callback):
         test_loss = self.model.evaluate(self.test_data, {"output_image": self.test_data, "output_class": self.test_labels}, verbose=0)
         self.test_losses.append(test_loss)
 
-# Main Execution
 def main():
     (train_images, train_labels), (test_images, test_labels) = tf.keras.datasets.mnist.load_data()
     num_classes = 10
@@ -125,7 +124,7 @@ def main():
         epochs=EPOCHS,
         batch_size=BATCH_SIZE,
         validation_data=(val_images, {"output_image": val_images, "output_class": val_labels}),
-        verbose=1,
+        verbose=2,
         callbacks=[test_loss_callback]
     )
 
