@@ -2,6 +2,8 @@
 
 This repository contains a deep learning project that combines image enhancement and classification using a modified U-Net architecture. The project focuses on recovering high-quality images from deliberately degraded MNIST digits while simultaneously classifying them.
 
+This project was originally created as part of a university assignment and subsequently refactored.
+
 ## Project Overview
 
 The project implements two versions of the solution:
@@ -52,7 +54,7 @@ The model provides:
 - Optimizer: Adam
 - Loss functions: 
   - Image reconstruction: Binary crossentropy
-  - Classification: Categorical crossentropy (enhanced_classification version only)
+  - Classification: Categorical crossentropy (`enhanced_classification.py` only)
 
 ## Implementation Details
 
